@@ -1,5 +1,6 @@
-const UserModel = require("../models/user");
-const TeacherModel = require("../models/teacher");
+const UserModel = require("../models/user");  
+
+const TeacherModel = require("../models/teacher");  
 
 class FrontController {
   static home = async (req, res) => {
@@ -41,5 +42,31 @@ class FrontController {
       console.log(error);
     }
   };
+
+//// insert data 
+
+static insertStudent = async (req, res) => {
+  try {
+    // console.log(req.body)
+
+const { name ,email,password ,confirmpassword} = req.body
+
+const result = new UserModel({
+
+  name:  name,
+  email : email,
+  password : password
+
+})
+
+await result.save()
+res.redirect('/')  /// route ** web
+
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 }
-module.exports = FrontController;
+module.exports = FrontController; 

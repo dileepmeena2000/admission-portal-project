@@ -21,6 +21,10 @@ app.use(express.static('public'))
 ///connecting with mongoose db 
 connectDB()
 
+// parse application/x-www-form-urlencoded   ( body parser link se liya hai)
+app.use(express.urlencoded({ extended: false }))
+
+
 
 app.use('/',web)
 
