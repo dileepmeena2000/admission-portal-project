@@ -47,19 +47,29 @@ class FrontController {
 
 static insertStudent = async (req, res) => {
   try {
-    // console.log(req.body)
+    console.log(req.body)
 
 const { name ,email,password ,confirmpassword} = req.body
 
-const result = new UserModel({
 
-  name:  name,
-  email : email,
-  password : password
+
+const data = await UserModel.create({
+
+
+name,
+email,
+password
+
+
+
+// const result = new UserModel({
+
+//   name:  name,
+//   email : email,
+//   password : password
 
 })
 
-await result.save()
 res.redirect('/')  /// route ** web
 
 

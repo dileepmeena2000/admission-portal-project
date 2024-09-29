@@ -16,12 +16,14 @@ const TeacherSchema = mongoose.Schema({
             type: String,
             require:true
         
-            }
-
+            },
+        },
+        {
+          timestamps: true,
            
             })
 
                 const TeacherModel= mongoose.model('teacher',TeacherSchema)
-                module.exports =TeacherModel
+                module.exports =TeacherModel ;
 
 
