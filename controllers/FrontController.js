@@ -1,6 +1,6 @@
-const UserModel = require("../models/user");  
+const UserModel = require("../models/user");
 
-const TeacherModel = require("../models/teacher");  
+const TeacherModel = require("../models/teacher");
 
 class FrontController {
   static home = async (req, res) => {
@@ -43,35 +43,24 @@ class FrontController {
     }
   };
 
-//// insert data 
+  //// insert data
 
-static insertStudent = async (req, res) => {
-  try {
-    console.log(req.body)
+  static insertStudent = async (req, res) => {
+    try {
+      console.log(req.body);
 
-const { name ,email,password ,confirmpassword} = req.body
+      const { name, email, password, confirmpassword } = req.body;
 
+      const data = await UserModel.create({
+        name,
+        email,
+        password,
+      });
 
-
-const data = await UserModel.create({
-
-
-name,
-email,
-password
-
-
-
-
-})
-
-res.redirect('/')  /// route ** web
-
-
-  } catch (error) {
-    console.log(error);
-  }
-};
-
+      res.redirect("/"); /// route ** web
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
-module.exports = FrontController; 
+module.exports = FrontController;
