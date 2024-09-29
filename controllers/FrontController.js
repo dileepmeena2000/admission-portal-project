@@ -62,11 +62,6 @@ password
 
 
 
-// const result = new UserModel({
-
-//   name:  name,
-//   email : email,
-//   password : password
 
 })
 
