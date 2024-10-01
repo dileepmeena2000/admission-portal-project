@@ -47,7 +47,7 @@ class FrontController {
 
   static insertStudent = async (req, res) => {
     try {
-      console.log(req.body);
+      // console.log(req.body);
 
       const { name, email, password, confirmpassword } = req.body;
 
