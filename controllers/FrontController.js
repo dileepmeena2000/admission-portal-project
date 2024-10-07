@@ -45,6 +45,9 @@ class FrontController {
 
   //// insert data
 
+
+
+  
   static insertStudent = async (req, res) => {
     try {
       // console.log(req.body);

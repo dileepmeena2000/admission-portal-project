@@ -14,7 +14,14 @@ route.post("/insertStudent", FrontController.insertStudent);
 
 //adminController
 route.get("/admin/dashboard", AdminController.dashboard);
-route.get("/admin/studentDisplay", AdminController.displayStudent);
-route.get("/admin/deleteStudent/:id", AdminController.deleteStudent);
+route.get("/admin/displayStudent", AdminController.displayStudent);
+route.get("/admin/deletestudent/:id", AdminController.deletestudent);
+route.get("/admin/viewstudent/:id", AdminController.viewstudent);
+route.get("/admin/editstudent/:id", AdminController.editstudent);
+
+route.post("/admin/studentUpdate/:id", AdminController.studentUpdate);
+
+
+
 
 module.exports = route;

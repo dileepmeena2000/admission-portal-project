@@ -36,7 +36,7 @@
             data-toggle="modal"
             data-target="#modal-default"
           >
-            Launch Default Modal
+            View Modal
           </button>
         </div>
         <!-- /.card-header -->
@@ -48,27 +48,17 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
-                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <% d.forEach((item)=>{ %>
-
               <tr>
-                <td><%= item._id %></td>
-                <td><%= item.name %></td>
-                <td><%= item.email %></td>
-                <td><%= item.password %></td>
-
-                <td>
-                  <a href="/admin/viewstudent/<%= item._id %>" class="btn btn-primary" >View </a>
-                  <a href="/admin/editstudent/<%= item._id %>" class="btn btn-success">Edit </a>
-                  <a href="/admin/deletestudent/<%= item._id %>" class="btn btn-danger">Delete </a>
-                </td>
+                <td><%= d._id %></td>
+                <td><%= d.name %></td>
+                <td><%= d.email %></td>
+                <td><%= d.password %></td>
               </tr>
-
-              <% }) %>
             </tbody>
+
             <tfoot>
               <tr>
                 <th>Id</th>
