@@ -1,6 +1,7 @@
 const UserModel = require("../models/user");
 
 const TeacherModel = require("../models/teacher");
+const { message } = require("statuses");
 
 class FrontController {
   static home = async (req, res) => {
@@ -29,7 +30,7 @@ class FrontController {
 
   static register = async (req, res) => {
     try {
-      res.render("register");
+      res.render("register" ,{message: req.flash('error')});
     } catch (error) {
       console.log(error);
     }
@@ -45,22 +46,26 @@ class FrontController {
 
   //// insert data
 
-
-
-  
   static insertStudent = async (req, res) => {
     try {
-      // console.log(req.body);
-
       const { name, email, password, confirmpassword } = req.body;
 
-      const data = await UserModel.create({
-        name,
-        email,
-        password,
-      });
+      if (!name || !email || !password || !confirmpassword) {
+        req.flash("error", "All Fields are Required.");
+        return res.redirect("/register");
+      }
 
-      res.redirect("/"); /// route ** web
+      const isEmail = await UserModel.findOne({ email });
+      if (isEmail) {
+        req.flash("error", "Email Already Exists.");
+
+        return res.redirect("/register");
+      }
+
+      if (password != confirmpassword) {
+        req.flash("error", "password does not match.");
+        return res.redirect("/register");
+      }
     } catch (error) {
       console.log(error);
     }

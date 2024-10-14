@@ -20,6 +20,10 @@ route.get("/admin/viewstudent/:id", AdminController.viewstudent);
 route.get("/admin/editstudent/:id", AdminController.editstudent);
 
 route.post("/admin/studentUpdate/:id", AdminController.studentUpdate);
+route.post("/admin/insertStudent", AdminController.StudentInsert);
+
+
+
 
 
 

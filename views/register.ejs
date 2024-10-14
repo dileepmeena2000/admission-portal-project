@@ -51,6 +51,13 @@
               <!-- Heading (Register Here) -->
               <h1 class="mb-5 text-center">Register Here</h1>
 
+              <% if(message.length > 0) { %>
+              <div class="alert alert-danger">
+                <!--  massage  prinent -->
+                <%= message %>
+              </div>
+              <% } %>
+
               <!-- User Name -->
               <div class="row mb-4">
                 <div
@@ -64,7 +71,6 @@
                     class="form-control text-capitalize"
                     type="text"
                     placeholder="Enter your name"
-                    required
                   />
                 </div>
               </div>
@@ -82,7 +88,6 @@
                     class="form-control"
                     type="email"
                     placeholder="name@example.com"
-                    required
                   />
                 </div>
               </div>
@@ -95,12 +100,7 @@
                   Password
                 </div>
                 <div class="col-lg-10">
-                  <input
-                    name="password"
-                    class="form-control"
-                    type="password"
-                    required
-                  />
+                  <input name="password" class="form-control" type="password" />
                 </div>
               </div>
 
@@ -116,14 +116,16 @@
                     name="confirmpassword"
                     class="form-control"
                     type="password"
-                    required
+                  
                   />
                 </div>
               </div>
 
               <!-- Button (Login) -->
               <center>
-                <button  type="submit"  class="btn btn-primary mb-5 btn-lg">Register</button>
+                <button type="submit" class="btn btn-primary mb-5 btn-lg">
+                  Register
+                </button>
               </center>
             </form>
           </div>
