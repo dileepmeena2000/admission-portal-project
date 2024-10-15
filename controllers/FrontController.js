@@ -1,7 +1,8 @@
 const UserModel = require("../models/user");
 
 const TeacherModel = require("../models/teacher");
-const { message } = require("statuses");
+
+const bcrypt = require('bcrypt');
 
 class FrontController {
   static home = async (req, res) => {
@@ -22,7 +23,7 @@ class FrontController {
 
   static login = async (req, res) => {
     try {
-      res.render("login");
+      res.render("login" ,{ message: req.flash("success") });
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +31,7 @@ class FrontController {
 
   static register = async (req, res) => {
     try {
-      res.render("register" ,{message: req.flash('error')});
+      res.render("register", { message: req.flash("error") });
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +67,17 @@ class FrontController {
         req.flash("error", "password does not match.");
         return res.redirect("/register");
       }
+
+      console.log(req.files)
+
+      // const hashPassword = await bcrypt.hash(password,10)
+      // const data = await UserModel.create({
+      //   name,
+      //   email,
+      //   password:hashPassword
+      // });
+      // req.flash("success", "Register Success  !Plz Login");
+      // res.redirect("/"); /// route ** web
     } catch (error) {
       console.log(error);
     }

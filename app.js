@@ -1,4 +1,3 @@
-
 const express = require("express");
 // console.log(express)
 const app = express();
@@ -7,11 +6,13 @@ const Port = 3000;
 const web = require("./routing/web");
 
 const connectDB = require("./db/connectDB");
+const fileUpload = require('express-fileUpload');
 
 
 //  connect flash and session
 const session = require("express-session");
 const flash = require("connect-flash");
+
 // message
 
 app.use(
@@ -28,7 +29,6 @@ app.use(
 
 app.use(flash());
 
-
 //routing
 
 // ejs (html css)
@@ -36,6 +36,15 @@ app.set("view engine", "ejs");
 
 // css image link public
 app.use(express.static("public"));
+
+/// image Uploade
+
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+  })
+);
 
 ///connecting with mongoose db
 connectDB();
@@ -50,3 +59,4 @@ app.listen(Port, console.log("server start localhost:3000"));
 
 /// npm i connect-flash
 // npm i express-session
+///npm i express-fileupload
