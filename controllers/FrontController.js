@@ -1,11 +1,7 @@
 const UserModel = require("../models/user");
-
 const TeacherModel = require("../models/teacher");
-
 const bcrypt = require("bcrypt");
-
 const cloudinary = require("cloudinary");
-
 // setup
 cloudinary.config({
   cloud_name: "dxyrkzsua",
@@ -53,9 +49,7 @@ class FrontController {
       console.log(error);
     }
   };
-
   //// insert data
-
   static insertStudent = async (req, res) => {
     try {
       const { name, email, password, confirmpassword } = req.body;
@@ -81,18 +75,22 @@ class FrontController {
       // image upload
 
       const file = req.files.image;
-      console.log(file);
+
       const imageUpload = await cloudinary.uploader.upload(file.tempFilePath, {
         folder: "userprofile",
       });
       console.log(imageUpload);
 
-      // const hashPassword = await bcrypt.hash(password,10)
-      // const data = await UserModel.create({
-      //   name,
-      //   email,
-      //   password:hashPassword
-      // });
+      const hashPassword = await bcrypt.hash(password, 10);
+      const data = await UserModel.create({
+        name,
+        email,
+        password: hashPassword,
+        image: {
+          public_id: imageUpload.public_id,
+          url: imageUpload.secure_url
+        }
+      });
       req.flash("success", "Register Success  !Plz Login");
       res.redirect("/"); /// route ** web
     } catch (error) {
@@ -101,3 +99,4 @@ class FrontController {
   };
 }
 module.exports = FrontController;
+
