@@ -6,7 +6,7 @@ const Port = 3000;
 const web = require("./routing/web");
 
 const connectDB = require("./db/connectDB");
-const fileUpload = require('express-fileUpload');
+const fileUpload = require('express-fileupload');  
 
 
 //  connect flash and session

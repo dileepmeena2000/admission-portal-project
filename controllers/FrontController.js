@@ -2,7 +2,16 @@ const UserModel = require("../models/user");
 
 const TeacherModel = require("../models/teacher");
 
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
+
+const cloudinary = require("cloudinary");
+
+// setup
+cloudinary.config({
+  cloud_name: "dxyrkzsua",
+  api_key: "159779726955913",
+  api_secret: "mLJx5oNPW3_rNhru-5FXvvBt83E",
+});
 
 class FrontController {
   static home = async (req, res) => {
@@ -23,7 +32,7 @@ class FrontController {
 
   static login = async (req, res) => {
     try {
-      res.render("login" ,{ message: req.flash("success") });
+      res.render("login", { message: req.flash("success") });
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +77,15 @@ class FrontController {
         return res.redirect("/register");
       }
 
-      console.log(req.files)
+      // console.log(req.files)
+      // image upload
+
+      const file = req.files.image;
+      console.log(file);
+      const imageUpload = await cloudinary.uploader.upload(file.tempFilePath, {
+        folder: "userprofile",
+      });
+      console.log(imageUpload);
 
       // const hashPassword = await bcrypt.hash(password,10)
       // const data = await UserModel.create({
@@ -76,8 +93,8 @@ class FrontController {
       //   email,
       //   password:hashPassword
       // });
-      // req.flash("success", "Register Success  !Plz Login");
-      // res.redirect("/"); /// route ** web
+      req.flash("success", "Register Success  !Plz Login");
+      res.redirect("/"); /// route ** web
     } catch (error) {
       console.log(error);
     }
