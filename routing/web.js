@@ -9,8 +9,16 @@ route.get("/", FrontController.login);
 route.get("/register", FrontController.register);
 route.get("/contact", FrontController.contact);
 
+
+
+
+
 //// insert data
 route.post("/insertStudent", FrontController.insertStudent);
+route.post("/verifyLogin", FrontController.verifyLogin);
+route.get("/Logout", FrontController.Logout);
+
+
 
 //adminController
 route.get("/admin/dashboard", AdminController.dashboard);

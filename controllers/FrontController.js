@@ -2,6 +2,8 @@ const UserModel = require("../models/user");
 const TeacherModel = require("../models/teacher");
 const bcrypt = require("bcrypt");
 const cloudinary = require("cloudinary");
+ const jwt = require("jsonwebtoken");
+// var jwt = require('jsonwebtoken');
 // setup
 cloudinary.config({
   cloud_name: "dxyrkzsua",
@@ -28,7 +30,10 @@ class FrontController {
 
   static login = async (req, res) => {
     try {
-      res.render("login", { message: req.flash("success") });
+      res.render("login", {
+        message: req.flash("success"),
+        msg: req.flash("error"),
+      });
     } catch (error) {
       console.log(error);
     }
@@ -88,8 +93,8 @@ class FrontController {
         password: hashPassword,
         image: {
           public_id: imageUpload.public_id,
-          url: imageUpload.secure_url
-        }
+          url: imageUpload.secure_url,
+        },
       });
       req.flash("success", "Register Success  !Plz Login");
       res.redirect("/"); /// route ** web
@@ -97,6 +102,45 @@ class FrontController {
       console.log(error);
     }
   };
+
+  static verifyLogin = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      if (email && password) {
+        const user = await UserModel.findOne({ email: email });
+
+        if (user != null) {
+          const isMatched = await bcrypt.compare(password, user.password);
+          console.log(isMatched);
+
+          
+          if (isMatched) {
+             // token create
+            let token = jwt.sign({ ID: user.id }, "dileepmeena1234");
+        
+            //  console.log(token)
+            res.cookie("token", token);
+            res.redirect("/home");
+          }
+        } else {
+          req.flash("error", "you are not a registered user");
+          return res.redirect("/");
+        }
+      } else {
+        req.flash("error", "All Fields Required");
+        res.redirect("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  static Logout = async (req, res) => {
+    try {
+      res.redirect("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 }
 module.exports = FrontController;
-
