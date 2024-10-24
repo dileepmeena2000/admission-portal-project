@@ -7,7 +7,12 @@ const web = require("./routing/web");
 
 const connectDB = require("./db/connectDB");
 const fileUpload = require('express-fileupload');  
+let cookieParser = require('cookie-parser')
 
+
+
+/// token get 
+app.use(cookieParser())
 
 //  connect flash and session
 const session = require("express-session");
@@ -61,3 +66,4 @@ app.listen(Port, console.log("server start localhost:3000"));
 // npm i express-session
 ///npm i express-fileupload
 ///npm i jsonwebtoken
+//npm i cookie-parser

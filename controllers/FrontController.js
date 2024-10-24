@@ -2,8 +2,8 @@ const UserModel = require("../models/user");
 const TeacherModel = require("../models/teacher");
 const bcrypt = require("bcrypt");
 const cloudinary = require("cloudinary");
- const jwt = require("jsonwebtoken");
-// var jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+
 // setup
 cloudinary.config({
   cloud_name: "dxyrkzsua",
@@ -113,11 +113,10 @@ class FrontController {
           const isMatched = await bcrypt.compare(password, user.password);
           console.log(isMatched);
 
-          
           if (isMatched) {
-             // token create
+            // token create
             let token = jwt.sign({ ID: user.id }, "dileepmeena1234");
-        
+
             //  console.log(token)
             res.cookie("token", token);
             res.redirect("/home");
@@ -134,9 +133,9 @@ class FrontController {
       console.log(error);
     }
   };
-
   static Logout = async (req, res) => {
     try {
+      res.clearCookie("token") // clearcookie ---> token ko clear krna
       res.redirect("/");
     } catch (error) {
       console.log(error);
