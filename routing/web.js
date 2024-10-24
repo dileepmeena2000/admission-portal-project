@@ -33,7 +33,4 @@ route.post("/admin/insertStudent", AdminController.StudentInsert);
 
 
 
-
-
-
 module.exports = route;
