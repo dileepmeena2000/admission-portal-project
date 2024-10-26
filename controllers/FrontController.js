@@ -14,7 +14,9 @@ cloudinary.config({
 class FrontController {
   static home = async (req, res) => {
     try {
-      res.render("home"); // home.ejs file
+      const {name,image} =req.userData
+      console.log(image)
+      res.render("home",{n:name,i:image}); // home.ejs file
     } catch (error) {
       console.log(error);
     }
@@ -22,7 +24,9 @@ class FrontController {
 
   static about = async (req, res) => {
     try {
-      res.render("about");
+      const {name,image} =req.userData
+
+      res.render("about",{n:name,i:image});
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +53,9 @@ class FrontController {
 
   static contact = async (req, res) => {
     try {
-      res.render("contact");
+      const {name,image} =req.userData
+
+      res.render("contact",{n:name,i:image});
     } catch (error) {
       console.log(error);
     }

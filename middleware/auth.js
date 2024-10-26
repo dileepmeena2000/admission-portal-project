@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
+const UserModel = require("../models/user");
 
-const checkAuth = (req, res ,next) => {
+const checkAuth = async(req, res ,next) => {
 //   console.log("hello auth");
 
 const {token} = req.cookies
@@ -11,6 +12,10 @@ if(!token){
 }else{
     const verifyToken = jwt.verify(token , 'dileepmeena1234')
     // console.log(verifyToken)
+    const data = await UserModel.findOne({_id:verifyToken.ID})
+    //console.log(data)
+    req.userData =data
+    
   next() // next method router pr paucha dega
 }
 
